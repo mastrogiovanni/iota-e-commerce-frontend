@@ -39,9 +39,11 @@
 
 </script>
 
+<!--
 <div class="container">
 	<QrCode size="500" value={JSON.stringify(value)} />
 </div>
+-->
 
 <ServerAdmin bind:role={role}></ServerAdmin>
 
