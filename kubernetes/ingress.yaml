@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: integration-service-fe
+spec:
+  rules:
+  - host: ensuresec.solutions.iota.org
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: integration-service-fe-service
+            port:
+              number: 5000

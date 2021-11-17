@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: integration-service-fe
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: integration-service-fe
+  template:
+    metadata:
+      labels:
+        app: integration-service-fe
+    spec:
+      initContainers:
+      - name: wait-for-integration-service
+        image: busybox:1.28
+        args:
+        - /bin/sh
+        - -c
+        - >
+          set -x;
+          until nslookup "integration-service-api.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local";
+          do 
+          echo waiting for Integration Service API;
+          sleep 2;
+          done
+
+      containers:
+      - image: mastrogiovanni/integration-service-fe:0.0.2
+        name: integration-service-fe
+        resources:
+          requests:
+            memory: "100Mi"
+            cpu: "250m"
+          limits:
+            memory: "250Mi"
+            cpu: "500m"
+        ports:
+        - protocol: TCP
+          containerPort: 5000
+

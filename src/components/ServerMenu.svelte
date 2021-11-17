@@ -6,7 +6,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-    <a class="navbar-brand" href="#" on:click|preventDefault={() => { page = null }} >
+    <a class="navbar-brand" href={'#'} on:click|preventDefault={() => { page = null }} >
         <img src="https://logos-download.com/wp-content/uploads/2018/04/Iota_logo_black-700x678.png" width="30" height="30" class="d-inline-block align-top" alt="">
         IOTA e-Commerce IDE
     </a>
@@ -19,17 +19,22 @@
       <ul class="navbar-nav mr-auto">
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href={'#'} id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Identity
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" on:click|preventDefault={() => { page = "create-person" }} href="!#">Create Person</a>
+            <a class="dropdown-item" on:click|preventDefault={() => { page = "create-person" }} href={'#'}>Create Person</a>
           </div>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" on:click|preventDefault={() => { page = "create-credential" }} href="#">Credential</a>
+          <a class="nav-link" on:click|preventDefault={() => { page = "create-credential" }} href={'#'}>Credential</a>
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link" on:click|preventDefault={() => { page = "verify-credential" }} href={'#'}>Verify</a>
+        </li>
+
         <!--
         <li class="nav-item active">
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
@@ -41,7 +46,7 @@
       </ul>
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="#" on:click|preventDefault={logout}>Logout</a>
+          <a class="nav-link" href={'#'} on:click|preventDefault={logout}>Logout</a>
         </li>
       </ul>
       <!--

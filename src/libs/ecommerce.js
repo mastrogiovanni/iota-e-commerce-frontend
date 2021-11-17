@@ -2,10 +2,36 @@ import { get } from 'svelte/store';
 import { apiKey } from './store.js'
 import { getHexEncodedKey, signNonce } from './utility.js'
 import { Buffer } from 'buffer';
+import { serverJWT } from './store' 
+
+export const verifyCredential = async (credential) => {
+	console.log('Checking the credential:', credential?.type?.[1]);
+	return await fetch(`/api/v1/verification/check-credential?api-key=${get(apiKey)}`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(credential)
+	}).then(x => x.json())
+
+		/*
+	const res = await axios.post(`${Config.baseUrl}/verification/check-credential${apiKey}`, JSON.stringify(credential), axiosOptions);
+
+	if (res?.status === 200) {
+		console.log(JSON.stringify(res.data));
+		return res?.data?.isVerified;
+	}
+	return false;
+	*/
+}
 
 export const getIdInfo = async (did) => {
 	try {
-		return await fetch(`/api/v1/identities/identity/${did}?api-key=${get(apiKey)}`).then(x => x.json())
+		return await fetch(`/api/v1/identities/identity/${did}?api-key=${get(apiKey)}`, {
+			headers: {
+				'Authorization': 'Bearer ' + get(serverJWT),
+			}
+		}).then(x => x.json())
 	}
 	catch (e) { return null; }
 }

@@ -1,4 +1,5 @@
 <script>
+    export let identity;
     export let username;
     export let role;
     export let certified = false;
@@ -14,6 +15,12 @@
             keys = Object.keys(claim)
         }
     }
+
+    function copyClaim() {
+        if (claim) {
+            navigator.clipboard.writeText(JSON.stringify(identity, null, 2));
+        }
+    }
 </script>
 
 <div class="card user-card-full">
@@ -26,13 +33,16 @@
             </div>
         </div>
         <div class="col-sm-8">
+            {#if claim}
             <div class="card-block">
                 <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Claim</h6>
                 <div class="row">
                     {#each keys as key}
                     <div class="col-sm-6">
                         <p class="m-b-10 f-w-600">{normalize(key)}</p>
-                        <h6 class="text-muted f-w-400">{claim[key]}</h6>
+                        <h6 class="text-muted f-w-400">
+                            {claim[key]}
+                        </h6>
                     </div>
                     {/each}
                 </div>
@@ -51,7 +61,11 @@
                 -->
                 <ul class="social-link list-unstyled m-t-40 m-b-10">
                     {#if certified}
-                        <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Verified" data-abc="true"><i class="fas fa-certificate"></i></a></li>
+                        <li>
+                            <a href="#!" on:click|preventDefault={copyClaim} data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Verified" data-abc="true">
+                                <i class="fas fa-certificate"></i>
+                            </a>
+                        </li>
                     {/if}
                 </ul>
                 <!--
@@ -62,6 +76,7 @@
                 </ul>
             -->
             </div>
+            {/if}
         </div>
     </div>
 </div>

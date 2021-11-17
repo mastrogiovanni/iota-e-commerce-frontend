@@ -15,7 +15,8 @@
 </script>
 
 {#if identity}
-<IdentityCard
+<IdentityCard 
+    identity={identity}
     username={identity?.username}
     role={identity?.claim?.type}
     claim={identity?.claim}

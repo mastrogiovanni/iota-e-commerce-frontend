@@ -27,6 +27,7 @@
     "crypto-js": "^4.1.1",
     "noble-ed25519": "^1.2.5",
     "sirv-cli": "^1.0.0",
-    "svelte-json-tree": "^0.1.0"
+    "svelte-json-tree": "^0.1.0",
+    "svelte-qrcode": "^1.0.0"
   }
 }
