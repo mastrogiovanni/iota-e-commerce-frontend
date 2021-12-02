@@ -15,7 +15,7 @@
 
     /*
     let payload = {
-        "@context": "https://www.w3.org/2018/credentials/v1",
+        "@context": "https://www.w3.org/2018/credentials/v0.1",
         "id": "did:iota:5SwUyA1T3e9ePZStbFQFt6UTXY2dZsn4FojX4upWumX2",
         "type": [
             "VerifiableCredential",

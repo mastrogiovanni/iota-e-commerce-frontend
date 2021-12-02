@@ -6,7 +6,7 @@ import { serverJWT } from './store'
 
 export const verifyCredential = async (credential) => {
 	console.log('Checking the credential:', credential?.type?.[1]);
-	return await fetch(`/api/v1/verification/check-credential?api-key=${get(apiKey)}`, {
+	return await fetch(`/api/v0.1/verification/check-credential?api-key=${get(apiKey)}`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -27,7 +27,7 @@ export const verifyCredential = async (credential) => {
 
 export const getIdInfo = async (did) => {
 	try {
-		return await fetch(`/api/v1/identities/identity/${did}?api-key=${get(apiKey)}`, {
+		return await fetch(`/api/v0.1/identities/identity/${did}?api-key=${get(apiKey)}`, {
 			headers: {
 				'Authorization': 'Bearer ' + get(serverJWT),
 			}
@@ -38,7 +38,7 @@ export const getIdInfo = async (did) => {
 
 export const search = async (jwtToken) => {
 	try {
-		return await fetch(`/api/v1/identities/search?api-key=${get(apiKey)}`, {
+		return await fetch(`/api/v0.1/identities/search?api-key=${get(apiKey)}`, {
 			headers: {
 				'Authorization': 'Bearer ' + jwtToken,
 			}
@@ -48,13 +48,13 @@ export const search = async (jwtToken) => {
 }
 
 export const latestCredential = async (did) => {
-    return await fetch(`/api/v1/verification/latest-document/${did}?api-key=${get(apiKey)}`).then(x => x.json()).catch(() => null)
+    return await fetch(`/api/v0.1/verification/latest-document/${did}?api-key=${get(apiKey)}`).then(x => x.json()).catch(() => null)
 } 
 
 export const fetchAuth = async (identity) => {
     console.log('requesting nonce to sign...');
 
-    const url = `/api/v1/authentication/prove-ownership/${identity.doc.id}?api-key=${get(apiKey)}`;
+    const url = `/api/v0.1/authentication/prove-ownership/${identity.doc.id}?api-key=${get(apiKey)}`;
     const body = await fetch(url).then(x => x.json());
 	
     console.log(body)
@@ -67,7 +67,7 @@ export const fetchAuth = async (identity) => {
     console.log('signed nonce: ', signedNonce);
 
     console.log('requesting authentication token using signed nonce...', identity.doc.id);
-    const response = await fetch(`/api/v1/authentication/prove-ownership/${identity.doc.id}?api-key=${get(apiKey)}`, {
+    const response = await fetch(`/api/v0.1/authentication/prove-ownership/${identity.doc.id}?api-key=${get(apiKey)}`, {
 		method: "POST",
 		headers: {
 			'Content-Type': 'application/json'
@@ -81,7 +81,7 @@ export const fetchAuth = async (identity) => {
 };
 
 export const createIdentity = async (username, claim) => {
-    let response = await fetch(`/api/v1/identities/create?api-key=${get(apiKey)}`, {
+    let response = await fetch(`/api/v0.1/identities/create?api-key=${get(apiKey)}`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -97,7 +97,7 @@ export const createIdentity = async (username, claim) => {
 
 export const createCredential = async (sourceIdentity, targetDid, claim) => {
 
-    const url = `/api/v1/verification/create-credential?api-key=${get(apiKey)}`;
+    const url = `/api/v0.1/verification/create-credential?api-key=${get(apiKey)}`;
 
 	// let sourceIdentity = await getIdInfo(sourceDid)
 	// sourceIdentity.key.secret = secret;
