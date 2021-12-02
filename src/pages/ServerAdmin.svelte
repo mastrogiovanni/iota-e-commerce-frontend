@@ -102,6 +102,7 @@ verifyCredential,
   });
 
   async function getServerIdentity() {
+    serverIdentity = serverIdentity.replace(/\n/g, " ");
     let identity = JSON.parse(serverIdentity);
     let secret = identity?.key?.secret;
     let decrypted = await decrypt(secret, serverKey);
